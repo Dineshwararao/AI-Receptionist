@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Receptionist Feedback</title>
+    <style>
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 200vh;
+            display: center;
+            justify-content: cover;
+            align-items: center;
+            position: relative;
+            overflow: cover;
+            background-image: url("robot.jpg"); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+        }
+        .star-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .star-button:hover,
+        .selected {
+            color: orange;
+        }
+        h3, ul {
+            font-size: 24px;
+        }
+        form {
+            text-align: center;
+        }
+        .ball {
+            position: absolute;
+            size-adjust: 1px;
+            border-radius: 100%;
+            opacity: 0.5;
+        }
+
+        /* Remove bullets from list items */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Provide Feedback</h1>
+        <h2>Help us improve our services by providing feedback:</h2>
+
+        <!-- Help and Support Information -->
+        <h2>Help and Support:</h2>
+        <ul>
+            <li>For assistance, please contact our support team at support@example.com</li>
+            <li>Check our FAQ page for answers to common questions</li>
+            <li>If you encounter any issues, please let us know in the comments below</li>
+        </ul>
+
+        <!-- Feedback Form -->
+        <form action="/feedback.html" method="POST">
+            <h3>Overall Experience:</h3>
+            <input type="hidden" name="overall_rating" value="0">
+            <button type="button" class="star-button overall-stars" onclick="setRating('overall', 1)">★</button>
+            <button type="button" class="star-button overall-stars" onclick="setRating('overall', 2)">★</button>
+            <button type="button" class="star-button overall-stars" onclick="setRating('overall', 3)">★</button>
+            <button type="button" class="star-button overall-stars" onclick="setRating('overall', 4)">★</button>
+            <button type="button" class="star-button overall-stars" onclick="setRating('overall', 5)">★</button><br><br>
+            
+            <h3>Appointment Scheduling:</h3>
+            <input type="hidden" name="scheduling_rating" value="0">
+            <button type="button" class="star-button scheduling-stars" onclick="setRating('scheduling', 1)">★</button>
+            <button type="button" class="star-button scheduling-stars" onclick="setRating('scheduling', 2)">★</button>
+            <button type="button" class="star-button scheduling-stars" onclick="setRating('scheduling', 3)">★</button>
+            <button type="button" class="star-button scheduling-stars" onclick="setRating('scheduling', 4)">★</button>
+            <button type="button" class="star-button scheduling-stars" onclick="setRating('scheduling', 5)">★</button><br><br>
+            
+            <h3>Friendliness:</h3>
+            <input type="hidden" name="friendliness_rating" value="0">
+            <button type="button" class="star-button friendliness-stars" onclick="setRating('friendliness', 1)">★</button>
+            <button type="button" class="star-button friendliness-stars" onclick="setRating('friendliness', 2)">★</button>
+            <button type="button" class="star-button friendliness-stars" onclick="setRating('friendliness', 3)">★</button>
+            <button type="button" class="star-button friendliness-stars" onclick="setRating('friendliness', 4)">★</button>
+            <button type="button" class="star-button friendliness-stars" onclick="setRating('friendliness', 5)">★</button><br><br>
+            
+            <label for="comments">Comments (optional):</label><br>
+            <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <!-- Your JavaScript code here -->
+    <script>
+        function setRating(category, rating) {
+            var ratingField = document.querySelector('input[name="' + category + '_rating"]');
+            ratingField.value = rating;
+            
+            // Reset color of all stars in this category
+            var starButtons = document.querySelectorAll('.' + category + '-stars .star-button');
+            for (var i = 0; i < starButtons.length; i++) {
+                starButtons[i].classList.remove('selected');
+            }
+            
+            // Color stars up to the selected rating
+            for (var i = 0; i < rating; i++) {
+                starButtons[i].classList.add('selected');
+            }
+        }
+
+        // Animation for balls
+        const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+        const numBalls = 25;
+        const balls = [];
+
+        for (let i = 0; i < numBalls; i++) {
+            let ball = document.createElement("div");
+            ball.classList.add("ball");
+            ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+            ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
+            ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
+            ball.style.transform = `scale(${Math.random()})`;
+            ball.style.width = `8px`;
+            ball.style.height = '8px';
+            
+            balls.push(ball);
+            document.body.append(ball);
+        }
+
+        balls.forEach((el, i, ra) => {
+            let to = {
+                x: Math.random() * (i % 2 === 0 ? -11 : 11),
+                y: Math.random() * 12
+            };
+
+            let anim = el.animate(
+                [
+                    { transform: "translate(0, 0)" },
+                    { transform: `translate(${to.x}rem, ${to.y}rem)` }
+                ],
+                {
+                    duration: (Math.random() + 2) * 5000, // random duration
+                    direction: "alternate",
+                    fill: "both",
+                    iterations: Infinity,
+                    easing: "ease-in-out"
+                }
+            );
+        });
+    </script>
+</body>
+</html>

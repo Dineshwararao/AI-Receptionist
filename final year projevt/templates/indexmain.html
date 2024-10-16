@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Receptionist</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Main AI Receptionist Circle -->
+        <div class="menu-item main-menu-item" id="mainCircle">
+            <a href="#">AI Receptionist</a>
+        </div>
+        <!-- Sub-menu items -->
+        <a href="generalcon.html" class="menu-item sub-menu-item item1">
+            <div class="sub-menu-content"><br>User Guidance</div>
+        </a>
+        <a href="appointment.html" class="menu-item sub-menu-item item2">
+            <div class="sub-menu-content">Appointment Scheduling</div>
+        </a>
+        <a href="visitor.html" class="menu-item sub-menu-item item3">
+            <div class="sub-menu-content">Visitor CheckIN</div>
+        </a>
+        <a href="feedback.html" class="menu-item sub-menu-item item4">
+            <div class="sub-menu-content">Feedback</div>
+        </a>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

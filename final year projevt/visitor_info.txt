@@ -1,0 +1,2 @@
+Name: Arjun.M, Company: Datacamp, Purpose: for meeting with Data Scientist, Check-in Time: 2024-05-01 21:20:43.962836, Image Path: static/images\Arjun.M_2024-05-01_21-20-43.jpg
+Name: rajesh, Company: DATA SCIENCE INTERNSHIP, Purpose: 3f3f, Check-in Time: 2024-05-07 11:18:13.017364, Image Path: static/images\rajesh_2024-05-07_11-18-13.jpg

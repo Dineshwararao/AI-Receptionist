@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Appointment</title>
+    <style>
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("robot.jpg"); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+        }
+        body {
+            font-size: 15px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .ball {
+            position: absolute;
+            size-adjust: 1px;
+            border-radius: 100%;
+            opacity: 0.5;
+        }
+        /* Increase the size of the date input field */
+        input[type="date"], input[type="time"],input[type="number"], input[type="duration"], input[type="participants"] 
+        ,input[type="room"] ,input[type="text"] {
+            width: 200px; /* Adjust the width as needed */
+            height: 20px; /* Adjust the height as needed */
+            font-size: 16px; /* Adjust the font size as needed */
+            padding: 8px; /* Adjust the padding as needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Appointment Scheduling System!</h1>
+    <form action="/schedule_appointment" method="post">
+        <label for="date">Date:</label><br><br>
+        <!-- Use the date input type for the date field -->
+        <input type="date" id="date" name="date" required><br><br>
+        <label for="time">Time:</label><br><br>
+        <!-- Use the time input type for the time field -->
+        <input type="time" id="time" name="time" required><br><br>
+        <label for="duration">Duration (in minutes):</label><br><br>
+        <!-- Use the number input type for the duration field -->
+        <input type="number" id="duration" name="duration" required><br><br>
+        <label for="participants">Participants:</label><br><br>
+        <!-- Use datalist for autocomplete options -->
+        <input list="participantsList" id="participants" name="participants" required>
+        <datalist id="participantsList">
+            <option value="Bob">
+            <option value="David">
+            <option value="Alice">
+            <option value="Charlie">
+            <option value="Henry">
+            <option value="Jack">
+            <option value="Grace">
+            <option value="Emily">
+            <option value="Frank">    
+            <!-- Add more options as needed -->
+        </datalist><br><br>
+        <label for="room">Preferred meeting room:</label><br><br>
+        <!-- Use datalist for autocomplete options -->
+        <input list="roomList" id="room" name="room" required>
+        <datalist id="roomList">
+            <option value="Room 1">
+            <option value="Room 2">
+            <option value="Room 3">
+            <option value="Room 4">
+            <option value="Room 5"></option>
+            <!-- Add more options as needed -->
+        </datalist><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    
+    <script>
+       // Some random colors
+const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+
+const numBalls = 25;
+const balls = [];
+
+for (let i = 0; i < numBalls; i++) {
+  let ball = document.createElement("div");
+  ball.classList.add("ball");
+  ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+  ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
+  ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
+  ball.style.transform = `scale(${Math.random()})`;
+  ball.style.width = `8px`;
+  ball.style.height = '8px';
+  
+  balls.push(ball);
+  document.body.append(ball);
+}
+
+// Keyframes
+balls.forEach((el, i, ra) => {
+  let to = {
+    x: Math.random() * (i % 2 === 0 ? -11 : 11),
+    y: Math.random() * 12
+  };
+
+  let anim = el.animate(
+    [
+      { transform: "translate(0, 0)" },
+      { transform: `translate(${to.x}rem, ${to.y}rem)` }
+    ],
+    {
+      duration: (Math.random() + 2) * 5000, // random duration
+      direction: "alternate",
+      fill: "both",
+      iterations: Infinity,
+      easing: "ease-in-out"
+    }
+  );
+});
+    </script>
+</body>
+</html>
